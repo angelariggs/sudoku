@@ -4,26 +4,7 @@ var delimiter = /[.,_]/g;
 
 var replaceString = numberString.replace(delimiter, ' ');
 
-// console.log('"%s"', replaceString);
-//document.write(replaceString);
-
-// console.log("|" + replaceString.substr(0,3) + "|" + replaceString.substr(3,3) + "|" + replaceString.substr(6,3) + "|\n");
-
-// console.log("|" + replaceString.substr(9,3) + "|" + replaceString.substr(12,3) + "|" + replaceString.substr(15,3) + "|\n");
-
-// console.log("|" + replaceString.substr(18,3) + "|" + replaceString.substr(21,3) + "|" + replaceString.substr(24,3) + "|\n");
-
-
-// function displayGrid () {
-//   for (var i = 0; i < replaceString.length; i +=9) {
-//     console.log("+---------+---------+---------+");
-//     console.log("|" + replaceString.substr(i, 3) + "|" + replaceString.substr(i+3, 3) + "|" + replaceString.substr(i+6, 3) + "|\n");
-//   }
-//   console.log("+---------+---------+---------+");
-// }
-
-// displayGrid();
-
+/*create display for sudoku; not interactive, just display grid*/
 function displayGrid () {
   for (var i = 0; i<replaceString.length; i+=9) {
     if (i%27 === 0) {
@@ -37,4 +18,34 @@ function displayGrid () {
   console.log("+---------+---------+---------+")
 }
 
-displayGrid();
+// displayGrid();
+
+/*creating columns and rows out of the display*/
+var row0 = replaceString.substr(0,8);
+var row1 = replaceString.substr(9,17);
+var row2 = replaceString.substr(18,26);
+var row3 = replaceString.substr(27,35);
+var row4 = replaceString.substr(36,44);
+var row5 = replaceString.substr(45,53);
+var row6 = replaceString.substr(54,62);
+var row7 = replaceString.substr(63,71);
+var row8 = replaceString.substr(72,80);
+
+var arrayOfRows = [row0, row1, row2, row3, row4, row5, row6, row7, row8];
+
+var arrayOfColumns = [[],[],[],[],[],[],[],[],[]];
+
+var j = 0;
+for (var i = 0; i < 9; i++) {
+  j=i;
+  for(j; j < replaceString.length; j += 9) {
+    arrayOfColumns[i].push(replaceString[j]);
+  }
+  console.log(j);
+  console.log("hi")
+}
+
+console.log(arrayOfColumns);
+
+
+
