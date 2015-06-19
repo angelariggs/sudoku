@@ -1,16 +1,9 @@
 try {
   var _ = require('lodash');
 } catch(err) {
-
 }
 
 var inputString = '158.2..6.2...8..9..3..7.8.2.6.74......4.6.7......19.5.4.9.3..2..2..5...8.7..9.413'
-
-var delimiter = /[.,_]/g;
-
-var spacedString = inputString.replace(delimiter, ' ');
-
-
 
   function Block(grid) {
     this.grid = grid;
@@ -133,8 +126,30 @@ var grid = new Grid(9);
 
 grid.solve();
 console.log('hello');
-var initialState = grid.calcGridState();
-console.log(initialState);
+console.log(grid.calcGridState());
+
+var solvedGrid = grid.calcGridState();
+var solvedString = solvedGrid.toString();
+
+
+function displayGrid () {
+
+  for (var i = 0; i<solvedString.length; i+=9) {
+    if (i%27 === 0) {
+      console.log("+---------+---------+---------+");
+    }
+    
+    console.log("| " + solvedString[i] + "  " + solvedString[i+1] + "  " + solvedString[i+2] + " | "
+    + solvedString[i+3] + "  " + solvedString[i+4] + "  " + solvedString[i+5] + " | "
+    + solvedString[i+6] + "  " + solvedString[i+7] + "  " + solvedString[i+8] + " |")
+  }
+  console.log("+---------+---------+---------+")
+}
+
+displayGrid();
+
+
+
 
 
 
