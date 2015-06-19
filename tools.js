@@ -9,3 +9,8 @@ function locateRow(squareNum) {
 }
 
 
+
+this.poss = the digits that are missing = the digits that it needs
+
+
+
