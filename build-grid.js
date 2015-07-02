@@ -3,9 +3,10 @@ try {
 } catch(err) {
 }
 
+//values for starting unsolved sudoku puzzle. Dots are unsolved squares
 var inputString = '158.2..6.2...8..9..3..7.8.2.6.74......4.6.7......19.5.4.9.3..2..2..5...8.7..9.413'
 
-
+  //block = smaller 3x3 grid within larger 9x9 grid
   function Block(grid) {
     this.grid = grid;
     this.sqrs = [];
@@ -21,6 +22,7 @@ var inputString = '158.2..6.2...8..9..3..7.8.2.6.74......4.6.7......19.5.4.9.3..
     this.sqrs = [];
   }
 
+  // sqr = individual number or empty cell within 9x9 grid
   function Sqr(row, col, blockNum, inputChar) {
     this.number = inputChar;
     this.row = row;
@@ -37,8 +39,6 @@ var inputString = '158.2..6.2...8..9..3..7.8.2.6.74......4.6.7......19.5.4.9.3..
         for (var j = 0; j < this.row.sqrs.length; j++) {
           currentRow.push(this.row.sqrs[j].number);
         }
-        // console.log(currentRow);
-        // console.log(this.poss);
         this.poss = (_.difference(this.poss, currentRow));
       }
     }
@@ -48,8 +48,6 @@ var inputString = '158.2..6.2...8..9..3..7.8.2.6.74......4.6.7......19.5.4.9.3..
         for (var k = 0; k < this.col.sqrs.length; k++) {
           currentCol.push(this.col.sqrs[k].number);
         }
-        // console.log(currentCol);
-        // console.log(this.poss);
         this.poss = (_.difference(this.poss, currentCol));
       }
     }
@@ -59,8 +57,6 @@ var inputString = '158.2..6.2...8..9..3..7.8.2.6.74......4.6.7......19.5.4.9.3..
         for (var m = 0; m < this.block.sqrs.length; m++) {
           currentBlock.push(this.block.sqrs[m].number);
         }
-        // console.log(currentBlock);
-        // console.log(this.poss);
         this.poss = (_.difference(this.poss, currentBlock));
       }
     }
@@ -73,8 +69,6 @@ var inputString = '158.2..6.2...8..9..3..7.8.2.6.74......4.6.7......19.5.4.9.3..
         this.number = this.poss[0];
         this.row.grid.numberOfSquaresKnown++;
         this.poss.pop();
-        console.log("stuff");
-        console.log(this.row.grid.numberOfSquaresKnown);
       }
     }
   }
@@ -108,8 +102,6 @@ var inputString = '158.2..6.2...8..9..3..7.8.2.6.74......4.6.7......19.5.4.9.3..
           gridState += this.rows[i].sqrs[j].number;
         }
       } return gridState;
-      console.log("hi")
-      console.log(gridState);
     }
     this.solve = function() {
       while (this.numberOfSquaresKnown < 81) {
@@ -121,34 +113,30 @@ var inputString = '158.2..6.2...8..9..3..7.8.2.6.74......4.6.7......19.5.4.9.3..
       }
     }
   }// closes grid constructor
-console.log(this.calcGridState);
 
 var grid = new Grid(9);
 
 grid.solve();
-console.log('hello');
-console.log(grid.calcGridState());
 
 var solvedGrid = grid.calcGridState();
 var solvedString = solvedGrid.toString();
-
-
+console.log(solvedString);
+var finalGrid = "";
+//var finalGrid = "<p> +------+------+-------+<br />";
 function displayGrid () {
 
   for (var i = 0; i<solvedString.length; i+=9) {
-    if (i%27 === 0) {
-      console.log("+---------+---------+---------+");
-    }
-    
-    console.log("| " + solvedString[i] + "  " + solvedString[i+1] + "  " + solvedString[i+2] + " | "
-    + solvedString[i+3] + "  " + solvedString[i+4] + "  " + solvedString[i+5] + " | "
-    + solvedString[i+6] + "  " + solvedString[i+7] + "  " + solvedString[i+8] + " |")
-  }
-  console.log("+---------+---------+---------+")
-}
-
+      if (i%27 === 0) {
+        finalGrid += "+------+------+-------+<br/>";
+      }
+      finalGrid += " | " + solvedString[i] + " " + solvedString[i+1] + " " + solvedString[i+2] + " | " + solvedString[i+3] + "  " + solvedString[i+4] + "  " + solvedString[i+5] + " | " + solvedString[i+6] + "  " + solvedString[i+7] + "  " + solvedString[i+8] + " | <br/>";
+  }// closes for loop
+  finalGrid += "+------+------+-------+";
+};// closes function displayGrid
 displayGrid();
+console.log(finalGrid);
 
+$("#sudokuDiv").html(finalGrid);
 
 
 
