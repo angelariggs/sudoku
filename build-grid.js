@@ -127,11 +127,11 @@ function displayGrid () {
 
   for (var i = 0; i<solvedString.length; i+=9) {
       if (i%27 === 0) {
-        finalGrid += "+------+------+-------+<br/>";
+        finalGrid += "+-------+-------+------+<br/>";
       }
       finalGrid += " | " + solvedString[i] + " " + solvedString[i+1] + " " + solvedString[i+2] + " | " + solvedString[i+3] + "  " + solvedString[i+4] + "  " + solvedString[i+5] + " | " + solvedString[i+6] + "  " + solvedString[i+7] + "  " + solvedString[i+8] + " | <br/>";
   }// closes for loop
-  finalGrid += "+------+------+-------+";
+  finalGrid += "+-------+-------+------+";
 };// closes function displayGrid
 displayGrid();
 console.log(finalGrid);
